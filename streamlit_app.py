@@ -45,8 +45,8 @@ def fetch_suggestions(query):
       }
     }
     out = []
-    for i in data.response.suggestions:
-        out.append(i.sentence)
+    for suggestion in data["response"]["suggestions"]:
+        out.append(suggestion["sentence"])
     return out
 
 # Initialize session state for input text and suggestions
