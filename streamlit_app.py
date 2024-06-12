@@ -62,9 +62,9 @@ def main():
     # Textbox for input
     input_text = st.text_input("Enter text:", value=st.session_state.input_text, key="input_text")
 
-    # # Fetch suggestions based on current input text
-    # suggestions = fetch_suggestions(input_text)
-    # st.session_state.suggestions = suggestions
+    # Fetch suggestions based on current input text
+    suggestions = fetch_suggestions(input_text)
+    st.session_state.suggestions = suggestions
 
     # # Display dropdown with suggestions
     # if suggestions:
