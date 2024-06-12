@@ -41,10 +41,10 @@ def fetch_suggestions(query):
         }
     }
     
-    # Filtering suggestions based on the query
-    if query:
-        return [s["sentence"] for s in data["response"]["suggestions"] if query.lower() in s["sentence"].lower()]
-    return []
+    out = []
+    for suggestion in data["response"]["suggestions"]:
+        out.append(suggestion["sentence"])
+    return out
 
 # Initialize session state for input text and suggestions
 if 'input_text' not in st.session_state:
