@@ -3,46 +3,43 @@ import requests
 
 # Function to fetch suggestions from an API
 def fetch_suggestions(query):
-    # if query:
-    #     response = requests.get(f'https://api.example.com/suggestions?q={query}')
-    #     if response.status_code == 200:
-    #         return response.json().get('suggestions', [])
+    # Simulated API response
     data = {
-      "status": "SUCCESS",
-      "response": {
-          "suggestions": [
-              {
-                  "id": 0,
-                  "sentence": "with created time this quarter ",
-                  "index_to_replace": 30
-              },
-              {
-                  "id": 0,
-                  "sentence": "with modified time this quarter ",
-                  "index_to_replace": 30
-              },
-              {
-                  "id": 0,
-                  "sentence": "with created time yesterday ",
-                  "index_to_replace": 30
-              },
-              {
-                  "id": 0,
-                  "sentence": "with created time this year ",
-                  "index_to_replace": 30
-              },
-              {
-                  "id": 0,
-                  "sentence": "with created time this month ",
-                  "index_to_replace": 30
-              },
-              {
-                  "id": 0,
-                  "sentence": "with created time today ",
-                  "index_to_replace": 30
-              }
-          ]
-      }
+        "status": "SUCCESS",
+        "response": {
+            "suggestions": [
+                {
+                    "id": 0,
+                    "sentence": "with created time this quarter ",
+                    "index_to_replace": 30
+                },
+                {
+                    "id": 0,
+                    "sentence": "with modified time this quarter ",
+                    "index_to_replace": 30
+                },
+                {
+                    "id": 0,
+                    "sentence": "with created time yesterday ",
+                    "index_to_replace": 30
+                },
+                {
+                    "id": 0,
+                    "sentence": "with created time this year ",
+                    "index_to_replace": 30
+                },
+                {
+                    "id": 0,
+                    "sentence": "with created time this month ",
+                    "index_to_replace": 30
+                },
+                {
+                    "id": 0,
+                    "sentence": "with created time today ",
+                    "index_to_replace": 30
+                }
+            ]
+        }
     }
     out = []
     for suggestion in data["response"]["suggestions"]:
@@ -70,10 +67,11 @@ def main():
     if suggestions:
         selected_suggestion = st.selectbox("Suggestions:", options=suggestions, key="suggestions")
 
-    #     # Update the textbox with the selected suggestion
-    #     if selected_suggestion and selected_suggestion != st.session_state.input_text:
-    #         st.session_state.input_text = selected_suggestion
-    #         st.experimental_rerun()
+        # Update the textbox with the selected suggestion
+        if selected_suggestion and selected_suggestion != st.session_state.input_text:
+            st.session_state.input_text = selected_suggestion
+            st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
+
