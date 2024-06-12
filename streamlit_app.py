@@ -64,14 +64,14 @@ def main():
     suggestions = fetch_suggestions(input_text)
     st.session_state.suggestions = suggestions
 
-    # Display dropdown with suggestions
-    if suggestions:
-        selected_suggestion = st.selectbox("Suggestions:", options=suggestions, key="suggestions")
+    # # Display dropdown with suggestions
+    # if suggestions:
+    #     selected_suggestion = st.selectbox("Suggestions:", options=suggestions, key="suggestions")
 
-        # Update the textbox with the selected suggestion
-        if selected_suggestion and selected_suggestion != st.session_state.input_text:
-            st.session_state.input_text = selected_suggestion
-            st.experimental_rerun()
+    #     # Update the textbox with the selected suggestion
+    #     if selected_suggestion and selected_suggestion != st.session_state.input_text:
+    #         st.session_state.input_text = selected_suggestion
+    #         st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
