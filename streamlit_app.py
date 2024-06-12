@@ -61,6 +61,8 @@ def main():
     # Textbox for input
     input_text = st.text_input("Enter text:", value=st.session_state.input_text, key="input_text")
 
+    st.write(fetch_suggestions(input_text))
+    
     # Fetch suggestions based on current input text
     if input_text != st.session_state.input_text:
         st.session_state.input_text = input_text
