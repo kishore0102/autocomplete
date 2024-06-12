@@ -63,6 +63,7 @@ def main():
     # Fetch suggestions based on current input text
     suggestions = fetch_suggestions(input_text)
     st.session_state.suggestions = suggestions
+    st.write(suggestions)
 
     # # Display dropdown with suggestions
     # if suggestions:
