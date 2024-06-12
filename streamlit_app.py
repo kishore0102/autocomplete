@@ -1,9 +1,8 @@
 import streamlit as st
-import requests
 
-# Function to fetch suggestions from an API
+# Function to fetch suggestions from a dummy dictionary
 def fetch_suggestions(query):
-    # Simulated API response
+    # Simulated API response with hardcoded data
     data = {
         "status": "SUCCESS",
         "response": {
@@ -41,17 +40,19 @@ def fetch_suggestions(query):
             ]
         }
     }
-    out = []
-    for suggestion in data["response"]["suggestions"]:
-        out.append(suggestion["sentence"])
-    print(out)
-    return out
+    
+    # Filtering suggestions based on the query
+    if query:
+        return [s["sentence"] for s in data["response"]["suggestions"] if query.lower() in s["sentence"].lower()]
+    return []
 
 # Initialize session state for input text and suggestions
 if 'input_text' not in st.session_state:
     st.session_state.input_text = ""
 if 'suggestions' not in st.session_state:
     st.session_state.suggestions = []
+if 'selected_suggestion' not in st.session_state:
+    st.session_state.selected_suggestion = None
 
 # Main function to render the Streamlit app
 def main():
@@ -61,19 +62,25 @@ def main():
     input_text = st.text_input("Enter text:", value=st.session_state.input_text, key="input_text")
 
     # Fetch suggestions based on current input text
-    suggestions = fetch_suggestions(input_text)
-    st.session_state.suggestions = suggestions
-    st.write(suggestions)
+    if input_text != st.session_state.input_text:
+        st.session_state.input_text = input_text
+        st.session_state.suggestions = fetch_suggestions(input_text)
+        st.session_state.selected_suggestion = None
 
-    # # Display dropdown with suggestions
-    # if suggestions:
-    #     selected_suggestion = st.selectbox("Suggestions:", options=suggestions, key="suggestions")
+    # Display dropdown with suggestions
+    if st.session_state.suggestions:
+        selected_suggestion = st.selectbox(
+            "Suggestions:", 
+            options=[""] + st.session_state.suggestions, 
+            index=0, 
+            key="suggestions"
+        )
 
-    #     # Update the textbox with the selected suggestion
-    #     if selected_suggestion and selected_suggestion != st.session_state.input_text:
-    #         st.session_state.input_text = selected_suggestion
-    #         st.experimental_rerun()
+        # Update the textbox with the selected suggestion
+        if selected_suggestion and selected_suggestion != st.session_state.selected_suggestion:
+            st.session_state.selected_suggestion = selected_suggestion
+            st.session_state.input_text = selected_suggestion
+            st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
-
